@@ -1,10 +1,7 @@
 import random
-from io import BytesIO
 
 import factory
 from django.contrib.auth.models import User
-from django.core.files.base import ContentFile
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from factory.django import DjangoModelFactory
 from faker import Faker
 
@@ -46,24 +43,6 @@ class BodyMeasuresFactory(DjangoModelFactory):
     weight = random.randrange(50, 300)
     body_fat_percentage = random.randrange(4, 100)
     profile = factory.SubFactory(ProfileFactory)
-    front_photo = factory.LazyAttribute(
-            lambda _: ContentFile(
-                factory.django.ImageField()._make_data(
-                    {'width': 1024, 'height': 768}
-                ), 'example.jpg'
-            )
-        )
-    back_photo = factory.LazyAttribute(
-            lambda _: ContentFile(
-                factory.django.ImageField()._make_data(
-                    {'width': 1024, 'height': 768}
-                ), 'example.jpg'
-            )
-        )
-    side_photo = factory.LazyAttribute(
-            lambda _: ContentFile(
-                factory.django.ImageField()._make_data(
-                    {'width': 1024, 'height': 768}
-                ), 'example.jpg'
-            )
-        )
+    front_photo = factory.django.ImageField()
+    back_photo = factory.django.ImageField()
+    side_photo = factory.django.ImageField()
