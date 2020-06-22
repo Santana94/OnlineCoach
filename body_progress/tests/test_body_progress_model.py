@@ -28,3 +28,8 @@ def test_ffmi_calculation(body_measures):
 def test_ffmi_calculation_with_fixed_values():
     body_measures = BodyMeasuresFactory(weight=82, body_fat_percentage=12, profile__height=1.78)
     assert round(body_measures.ffmi, 3) == 22.775
+
+
+def test_ffmi_is_empty():
+    body_measures = BodyMeasuresFactory(weight=82, body_fat_percentage=None, profile__height=1.78)
+    assert body_measures.ffmi is None

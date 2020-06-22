@@ -43,6 +43,6 @@ class BodyMeasuresFactory(DjangoModelFactory):
     weight = random.randrange(50, 300)
     body_fat_percentage = random.randrange(4, 100)
     profile = factory.SubFactory(ProfileFactory)
-    front_photo = factory.django.ImageField()
-    back_photo = factory.django.ImageField()
-    side_photo = factory.django.ImageField()
+    front_photo = None
+    back_photo = None
+    side_photo = None
