@@ -1,18 +1,9 @@
 import pytest
-from django.contrib.auth.models import User
 
-from body_progress.factories import BodyMeasuresFactory
-from body_progress.models import Profile, BodyMeasures
+from user_profile.body_progress.factories import BodyMeasuresFactory
+from user_profile.body_progress.models import BodyMeasures
 
 pytestmark = [pytest.mark.django_db, pytest.mark.serial]
-
-
-def test_profile_model(profile):
-    assert profile == Profile.objects.last()
-
-
-def test_user_model(user):
-    assert user == User.objects.last()
 
 
 def test_body_measures_model(body_measures):

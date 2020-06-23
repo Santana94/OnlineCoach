@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from factory.django import DjangoModelFactory
 from faker import Faker
 
-from .models import Profile, BodyMeasures
+from user_profile.models import Profile
 
 fake = Faker('pt_BR')
 
@@ -33,16 +33,3 @@ class ProfileFactory(DjangoModelFactory):
     gender = random.choice([True, False])
     height = random.randrange(50, 300)
     user = factory.SubFactory(UserFactory)
-
-
-class BodyMeasuresFactory(DjangoModelFactory):
-
-    class Meta:
-        model = BodyMeasures
-
-    weight = random.randrange(50, 300)
-    body_fat_percentage = random.randrange(4, 100)
-    profile = factory.SubFactory(ProfileFactory)
-    front_photo = None
-    back_photo = None
-    side_photo = None

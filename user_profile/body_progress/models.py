@@ -1,21 +1,7 @@
-from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.db import models
 
-
-class AbstractModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    age = models.IntegerField("Idade")
-    gender = models.BooleanField("Gênero")
-    height = models.FloatField("Altura")
+from user_profile.models import AbstractModel, Profile
 
 
 class BodyMeasures(AbstractModel):

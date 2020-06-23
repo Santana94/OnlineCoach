@@ -30,7 +30,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Application Apps
-    'body_progress',
+    'user_profile.body_progress',
+    # 'user_profile.training_progress',
+    'user_profile',
 
     # Rest framework
     'rest_framework',
