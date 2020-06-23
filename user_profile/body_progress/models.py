@@ -8,9 +8,9 @@ class BodyMeasures(AbstractModel):
     weight = models.FloatField("Peso", validators=[MinValueValidator(20)])
     body_fat_percentage = models.FloatField("Percentual de gordura", validators=[MinValueValidator(4)], blank=True,
                                             null=True)
-    front_photo = models.ImageField("Foto frontal", upload_to='body_front_photos')
-    back_photo = models.ImageField("Foto traseira", upload_to='body_back_photos')
-    side_photo = models.ImageField("Foto lateral", upload_to='body_side_photos')
+    front_photo = models.ImageField("Foto frontal", upload_to='body_front_photos', blank=True, null=True)
+    back_photo = models.ImageField("Foto traseira", upload_to='body_back_photos', blank=True, null=True)
+    side_photo = models.ImageField("Foto lateral", upload_to='body_side_photos', blank=True, null=True)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     @property
