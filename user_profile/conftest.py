@@ -1,6 +1,5 @@
 from pytest_factoryboy import register
 
-from .factories import ProfileFactory, UserFactory
+from .factories import UserProfileFactory
 
-register(ProfileFactory)
-register(UserFactory)
+register(UserProfileFactory)

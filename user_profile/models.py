@@ -10,8 +10,13 @@ class AbstractModel(models.Model):
         abstract = True
 
 
-class Profile(AbstractModel):
-    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+GENDER_CHOICES = (
+    (0, 'Male'),
+    (1, 'Female'),
+)
+
+
+class UserProfile(User):
     age = models.IntegerField("Idade")
-    gender = models.BooleanField("Gênero")
+    gender = models.CharField("Gênero", choices=GENDER_CHOICES, max_length=10)
     height = models.FloatField("Altura")

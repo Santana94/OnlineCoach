@@ -4,7 +4,7 @@ import factory
 from factory.django import DjangoModelFactory
 from faker import Faker
 
-from user_profile.factories import ProfileFactory
+from user_profile.factories import UserProfileFactory
 from .models import BodyMeasures
 
 fake = Faker('pt_BR')
@@ -17,7 +17,7 @@ class BodyMeasuresFactory(DjangoModelFactory):
 
     weight = random.randrange(50, 300)
     body_fat_percentage = random.randrange(4, 100)
-    profile = factory.SubFactory(ProfileFactory)
+    user_profile = factory.SubFactory(UserProfileFactory)
     front_photo = None
     back_photo = None
     side_photo = None

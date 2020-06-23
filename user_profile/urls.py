@@ -1,12 +1,12 @@
 from django.urls import path, include
 from rest_framework import routers
-# from .views import UserProfileViewSet
+from .views import UserProfileViewSet
 
 router = routers.SimpleRouter()
-# router.register(r'', UserProfileViewSet, basename='files')
+router.register(r'', UserProfileViewSet, basename='user_profile')
 
 urlpatterns = router.urls
 
 urlpatterns += [
-    path('body_progress/', include('body_progress.urls'), name='body_progress')
+    path('body_progress/', include('user_profile.body_progress.urls'), name='body_progress')
 ]
