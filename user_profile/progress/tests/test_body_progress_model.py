@@ -1,9 +1,11 @@
 import pytest
 
+from commons.permission import PermissionMiddleware
 from user_profile.progress.factories import BodyMeasuresFactory
 from user_profile.progress.models import BodyMeasures
 
 pytestmark = [pytest.mark.django_db, pytest.mark.serial]
+PermissionMiddleware.user_is_superuser = True
 
 
 def test_body_measures_model(body_measures):

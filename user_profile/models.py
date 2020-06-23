@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from commons.permission import ModelPermissionManager
+
 
 class AbstractModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -20,3 +22,5 @@ class UserProfile(User):
     age = models.IntegerField("Idade")
     gender = models.CharField("Gênero", choices=GENDER_CHOICES, max_length=10)
     height = models.FloatField("Altura")
+
+    objects = ModelPermissionManager(['username'])

@@ -8,6 +8,7 @@ pytestmark = [pytest.mark.django_db, pytest.mark.serial]
 
 def test_profile_detail(client, user_profile):
     # WHEN
+    client.login(username='admin', password='adm1n')
     response = client.get('/user_profile/1/')
 
     # THEN
@@ -15,28 +16,35 @@ def test_profile_detail(client, user_profile):
     assert response.data == {
         'age': user_profile.age, 'gender': user_profile.gender, 'height': user_profile.height,
         'email': user_profile.email, 'first_name': user_profile.first_name, 'last_name': user_profile.last_name,
-        'password': user_profile.password, 'username': user_profile.username
+        'username': user_profile.username
     }
 
 
-def test_profile_list(client):
+@pytest.mark.parametrize('count, is_superuser', [
+    (3, True),
+    (1, False),
+])
+def test_profile_list(client, count, is_superuser):
     # GIVEN
     profiles = []
 
     for username in ['user1', 'user_2', 'user_3']:
-        profiles.append(UserProfileFactory(username=username))
+        profiles.append(UserProfileFactory(username=username, is_superuser=is_superuser))
 
     # WHEN
+    client.login(username='user1', password='adm1n')
     response = client.get('/user_profile/')
+
+    if not is_superuser:
+        profiles = [profiles[0]]
 
     # THEN
     assert response.status_code == status.HTTP_200_OK
-    assert response.data['count'] == 3
+    assert response.data['count'] == count
     assert response.data['results'] == [
         {
             'age': i.age, 'gender': i.gender, 'height': i.height,
-            'email': i.email, 'first_name': i.first_name, 'last_name': i.last_name,
-            'password': i.password, 'username': i.username
+            'email': i.email, 'first_name': i.first_name, 'last_name': i.last_name, 'username': i.username
         } for i in profiles
     ]
 

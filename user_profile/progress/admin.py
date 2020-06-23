@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from user_profile.progress.models import BodyMeasures
+
+admin.site.register(BodyMeasures)

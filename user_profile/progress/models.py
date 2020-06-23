@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from commons.permission import ModelPermissionManager
 from user_profile.models import AbstractModel, UserProfile
 
 
@@ -12,6 +13,8 @@ class BodyMeasures(AbstractModel):
     back_photo = models.ImageField("Foto traseira", upload_to='body_back_photos', blank=True, null=True)
     side_photo = models.ImageField("Foto lateral", upload_to='body_side_photos', blank=True, null=True)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    objects = ModelPermissionManager(['user_profile__username'])
 
     @property
     def ffmi(self):

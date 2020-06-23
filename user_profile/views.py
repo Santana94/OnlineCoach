@@ -5,5 +5,7 @@ from user_profile.serializers import UserProfileSerializer
 
 
 class UserProfileViewSet(ModelViewSet):
-    queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+
+    def get_queryset(self):
+        return UserProfile.objects.all()

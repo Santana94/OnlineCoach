@@ -5,5 +5,7 @@ from user_profile.progress.serializers import BodyMeasuresSerializer
 
 
 class BodyMeasuresViewSet(ModelViewSet):
-    queryset = BodyMeasures.objects.all()
     serializer_class = BodyMeasuresSerializer
+
+    def get_queryset(self):
+        return BodyMeasures.objects.all()
