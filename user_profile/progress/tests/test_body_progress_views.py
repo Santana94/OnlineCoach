@@ -1,6 +1,7 @@
 import pytest
 from rest_framework import status
 
+from user_profile.factories import UserProfileFactory
 from user_profile.progress.factories import BodyMeasuresFactory
 
 pytestmark = [pytest.mark.django_db, pytest.mark.serial]
@@ -13,6 +14,7 @@ def test_body_measures_list(client):
         body_measures.append(BodyMeasuresFactory(user_profile__username=username))
 
     # WHEN
+    client.login(username='user1', password='adm1n')
     response = client.get('/user_profile/progress/body_measures/')
 
     # THEN
@@ -28,9 +30,13 @@ def test_body_measures_list(client):
     ]
 
 
-def test_body_measures_detail(client, body_measures):
+def test_body_measures_detail(client):
+    # GIVEN
+    body_measures = BodyMeasuresFactory()
+
     # WHEN
-    response = client.get('/user_profile/progress/body_measures/1/')
+    client.login(username='admin', password='adm1n')
+    response = client.get(f'/user_profile/progress/body_measures/1/')
 
     # THEN
     assert response.status_code == status.HTTP_200_OK
@@ -42,13 +48,15 @@ def test_body_measures_detail(client, body_measures):
     }
 
 
-def test_body_measures_post(client, user_profile):
+def test_body_measures_post(client):
     # GIVEN
+    user_profile = UserProfileFactory()
     data = {
         'weight': 78, 'body_fat_percentage': 16, 'user_profile': user_profile.id,
     }
 
     # WHEN
+    client.login(username='admin', password='adm1n')
     response = client.post('/user_profile/progress/body_measures/', data=data, format='multipart')
 
     # THEN

@@ -6,7 +6,10 @@ from user_profile.factories import UserProfileFactory
 pytestmark = [pytest.mark.django_db, pytest.mark.serial]
 
 
-def test_profile_detail(client, user_profile):
+def test_profile_detail(client):
+    # GIVEN
+    user_profile = UserProfileFactory()
+
     # WHEN
     client.login(username='admin', password='adm1n')
     response = client.get('/user_profile/1/')
