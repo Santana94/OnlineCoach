@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Application Apps
-    'user_profile.body_progress',
+    'user_profile.progress',
     # 'user_profile.training_progress',
     'user_profile',
 

@@ -1,7 +1,7 @@
 import pytest
 from rest_framework import status
 
-from user_profile.body_progress.factories import BodyMeasuresFactory
+from user_profile.progress.factories import BodyMeasuresFactory
 
 pytestmark = [pytest.mark.django_db, pytest.mark.serial]
 
@@ -13,7 +13,7 @@ def test_body_measures_list(client):
         body_measures.append(BodyMeasuresFactory(user_profile__username=username))
 
     # WHEN
-    response = client.get('/user_profile/body_progress/body_measures/')
+    response = client.get('/user_profile/progress/body_measures/')
 
     # THEN
     assert response.status_code == status.HTTP_200_OK
@@ -30,7 +30,7 @@ def test_body_measures_list(client):
 
 def test_body_measures_detail(client, body_measures):
     # WHEN
-    response = client.get('/user_profile/body_progress/body_measures/1/')
+    response = client.get('/user_profile/progress/body_measures/1/')
 
     # THEN
     assert response.status_code == status.HTTP_200_OK
@@ -49,7 +49,7 @@ def test_body_measures_post(client, user_profile):
     }
 
     # WHEN
-    response = client.post('/user_profile/body_progress/body_measures/', data=data, format='multipart')
+    response = client.post('/user_profile/progress/body_measures/', data=data, format='multipart')
 
     # THEN
     assert response.status_code == status.HTTP_201_CREATED

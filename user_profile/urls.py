@@ -8,5 +8,5 @@ router.register(r'', UserProfileViewSet, basename='user_profile')
 urlpatterns = router.urls
 
 urlpatterns += [
-    path('body_progress/', include('user_profile.body_progress.urls'), name='body_progress')
+    path('progress/', include('user_profile.progress.urls'), name='progress')
 ]

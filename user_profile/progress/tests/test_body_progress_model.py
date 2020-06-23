@@ -1,7 +1,7 @@
 import pytest
 
-from user_profile.body_progress.factories import BodyMeasuresFactory
-from user_profile.body_progress.models import BodyMeasures
+from user_profile.progress.factories import BodyMeasuresFactory
+from user_profile.progress.models import BodyMeasures
 
 pytestmark = [pytest.mark.django_db, pytest.mark.serial]
 
