@@ -54,11 +54,16 @@ def test_profile_list(client, count, is_superuser):
 
 def test_profile_post(client):
     # GIVEN
+    headers = {
+        'Authorization': 'Basic bWF0aGV1czpsb2NhbGhvc3Q=',
+        'Cookie': 'csrftoken=JLmwrPZUJOSmrMj1C85ccugTBPco35pNP7Pqu5bu37F7VlB4ptIt2Ob6qdcyNDWp'
+    }
     data = {
         'age': 26, 'gender': 0, 'height': 1.7, 'username': 'teste', 'password': 'senha'
     }
 
     # WHEN
+    client.login(username='admin', password='adm1n')
     response = client.post('/user_profile/', data=data)
 
     # THEN
