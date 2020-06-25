@@ -63,15 +63,6 @@ def test_body_measures_post(client):
     assert response.status_code == status.HTTP_201_CREATED
 
 
-def test_body_measures_token_error(client):
-    # WHEN
-    response = client.get('/user_profile/progress/body_measures/')
-
-    # THEN
-    assert response.status_code == status.HTTP_401_UNAUTHORIZED
-    assert response.content == b'User \"Token\" is required!'
-
-
 def test_body_measures_invalid_token(client, body_measures):
     # GIVEN
     headers = {'Token': 'invalid'}

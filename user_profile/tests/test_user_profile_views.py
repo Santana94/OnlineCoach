@@ -66,15 +66,6 @@ def test_profile_post(client, user_profile):
     assert response.status_code == status.HTTP_201_CREATED
 
 
-def test_profile_token_error(client):
-    # WHEN
-    response = client.get('/user_profile/')
-
-    # THEN
-    assert response.status_code == status.HTTP_401_UNAUTHORIZED
-    assert response.content == b'User \"Token\" is required!'
-
-
 def test_profile_invalid_token(client, user_profile):
     # GIVEN
     headers = {'Token': 'invalid'}

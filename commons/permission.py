@@ -13,18 +13,13 @@ class PermissionMiddleware(MiddlewareMixin):
         token = request.META.get('Token')
         PermissionMiddleware.user_token = token
 
-        if token:
-            try:
-                user = Token.objects.get(key=token).user
-            except Token.DoesNotExist:
-                return HttpResponse(status=401, content='User not found!')
-
-            if user.is_superuser:
+        try:
+            if token and Token.objects.get(key=token).user.is_superuser:
                 PermissionMiddleware.user_is_superuser = True
             else:
                 PermissionMiddleware.user_is_superuser = False
-        else:
-            return HttpResponse(status=401, content='User \"Token\" is required!')
+        except Token.DoesNotExist:
+            return HttpResponse(status=401, content='User not found!')
 
 
 class ModelPermissionManager(Manager):
