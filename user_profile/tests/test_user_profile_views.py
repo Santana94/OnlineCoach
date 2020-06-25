@@ -11,8 +11,8 @@ def test_profile_detail(client):
     user_profile = UserProfileFactory()
 
     # WHEN
-    client.login(username='admin', password='adm1n')
-    response = client.get('/user_profile/1/')
+    headers = {'Token': user_profile.auth_token}
+    response = client.get('/user_profile/1/', **headers)
 
     # THEN
     assert response.status_code == status.HTTP_200_OK
@@ -35,8 +35,8 @@ def test_profile_list(client, count, is_superuser):
         profiles.append(UserProfileFactory(username=username, is_superuser=is_superuser))
 
     # WHEN
-    client.login(username='user1', password='adm1n')
-    response = client.get('/user_profile/')
+    headers = {'Token': profiles[0].auth_token}
+    response = client.get('/user_profile/', **headers)
 
     if not is_superuser:
         profiles = [profiles[0]]
@@ -52,19 +52,33 @@ def test_profile_list(client, count, is_superuser):
     ]
 
 
-def test_profile_post(client):
+def test_profile_post(client, user_profile):
     # GIVEN
-    headers = {
-        'Authorization': 'Basic bWF0aGV1czpsb2NhbGhvc3Q=',
-        'Cookie': 'csrftoken=JLmwrPZUJOSmrMj1C85ccugTBPco35pNP7Pqu5bu37F7VlB4ptIt2Ob6qdcyNDWp'
-    }
+    headers = {'Token': user_profile.auth_token}
     data = {
         'age': 26, 'gender': 0, 'height': 1.7, 'username': 'teste', 'password': 'senha'
     }
 
     # WHEN
-    client.login(username='admin', password='adm1n')
-    response = client.post('/user_profile/', data=data)
+    response = client.post('/user_profile/', data=data, **headers)
 
     # THEN
     assert response.status_code == status.HTTP_201_CREATED
+
+
+def test_profile_token_error(client):
+    # WHEN
+    response = client.get('/user_profile/')
+
+    # THEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+
+def test_profile_invalid_token(client, user_profile):
+    # GIVEN
+    headers = {'Token': 'invalid'}
+    # WHEN
+    response = client.get('/user_profile/', **headers)
+
+    # THEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED

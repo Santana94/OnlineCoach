@@ -14,8 +14,8 @@ def test_body_measures_list(client):
         body_measures.append(BodyMeasuresFactory(user_profile__username=username))
 
     # WHEN
-    client.login(username='user1', password='adm1n')
-    response = client.get('/user_profile/progress/body_measures/')
+    headers = {'Token': body_measures[0].user_profile.auth_token}
+    response = client.get('/user_profile/progress/body_measures/', **headers)
 
     # THEN
     assert response.status_code == status.HTTP_200_OK
@@ -35,8 +35,8 @@ def test_body_measures_detail(client):
     body_measures = BodyMeasuresFactory()
 
     # WHEN
-    client.login(username='admin', password='adm1n')
-    response = client.get(f'/user_profile/progress/body_measures/1/')
+    headers = {'Token': body_measures.user_profile.auth_token}
+    response = client.get(f'/user_profile/progress/body_measures/1/', **headers)
 
     # THEN
     assert response.status_code == status.HTTP_200_OK
@@ -56,8 +56,26 @@ def test_body_measures_post(client):
     }
 
     # WHEN
-    client.login(username='admin', password='adm1n')
-    response = client.post('/user_profile/progress/body_measures/', data=data, format='multipart')
+    headers = {'Token': user_profile.auth_token}
+    response = client.post('/user_profile/progress/body_measures/', data=data, format='multipart', **headers)
 
     # THEN
     assert response.status_code == status.HTTP_201_CREATED
+
+
+def test_body_measures_token_error(client):
+    # WHEN
+    response = client.get('/user_profile/progress/body_measures/')
+
+    # THEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+
+def test_body_measures_invalid_token(client, body_measures):
+    # GIVEN
+    headers = {'Token': 'invalid'}
+    # WHEN
+    response = client.get('/user_profile/progress/body_measures/', **headers)
+
+    # THEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED

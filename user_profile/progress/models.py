@@ -14,7 +14,7 @@ class BodyMeasures(AbstractModel):
     side_photo = models.ImageField("Foto lateral", upload_to='body_side_photos', blank=True, null=True)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
-    objects = ModelPermissionManager(['user_profile__username'])
+    objects = ModelPermissionManager(['user_profile__auth_token'])
 
     @property
     def ffmi(self):

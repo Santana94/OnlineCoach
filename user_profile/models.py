@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -27,10 +26,10 @@ class UserProfile(User):
     gender = models.CharField("Gênero", choices=GENDER_CHOICES, max_length=10)
     height = models.FloatField("Altura")
 
-    objects = ModelPermissionManager(['username'])
+    objects = ModelPermissionManager(['auth_token'])
 
 
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+@receiver(post_save, sender=UserProfile)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)

@@ -1,15 +1,30 @@
 from django.db.models import Manager, Q
+from django.http import HttpResponse
 from django.utils.deprecation import MiddlewareMixin
+from rest_framework.authtoken.models import Token
 
 
 class PermissionMiddleware(MiddlewareMixin):
 
-    username = None
+    user_token = None
     user_is_superuser = False
 
     def process_request(self, request):
-        PermissionMiddleware.username = request.user.username
-        PermissionMiddleware.user_is_superuser = request.user.is_superuser
+        token = request.META.get('Token')
+        PermissionMiddleware.user_token = token
+
+        if token:
+            try:
+                user = Token.objects.get(key=token).user
+            except Token.DoesNotExist:
+                return HttpResponse(status=401, content='User not found!')
+
+            if user.is_superuser:
+                PermissionMiddleware.user_is_superuser = True
+            else:
+                PermissionMiddleware.user_is_superuser = False
+        else:
+            return HttpResponse(status=401, content='User \"Token\" is required!')
 
 
 class ModelPermissionManager(Manager):
@@ -21,14 +36,14 @@ class ModelPermissionManager(Manager):
         self.clause_list = clause_list
 
     def get_queryset(self):
-        username = PermissionMiddleware.username
+        user_token = PermissionMiddleware.user_token
 
         if PermissionMiddleware.user_is_superuser:
             return super().get_queryset().all()
-        elif username:
+        elif user_token:
             q = Q()
             for clause in self.clause_list:
-                q |= Q(**{clause: username})
+                q |= Q(**{clause: user_token})
 
             return super().get_queryset().filter(q)
         else:
