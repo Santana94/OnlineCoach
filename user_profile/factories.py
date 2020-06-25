@@ -24,4 +24,4 @@ class UserProfileFactory(DjangoModelFactory):
 
     age = random.randint(1, 100)
     gender = random.choice(['Male', 'Female'])
-    height = random.randrange(50, 300)
+    height = random.randrange(1, 3)

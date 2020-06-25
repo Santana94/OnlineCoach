@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import pytest
 from rest_framework import status
 
@@ -23,7 +25,7 @@ def test_body_measures_list(client):
     assert response.data['results'] == [
         {
             'created_at': str(i.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
-            'updated_at': str(i.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
+            'updated_at': str(i.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ")), 'ffmi': str(round(i.ffmi, 2)),
             'weight': i.weight, 'body_fat_percentage': i.body_fat_percentage, 'front_photo': None,
             'back_photo': None, 'side_photo': None, 'user_profile': i.user_profile.id, 'id': i.id
         } for i in body_measures
@@ -44,7 +46,8 @@ def test_body_measures_detail(client):
         'created_at': str(body_measures.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
         'updated_at': str(body_measures.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
         'weight': body_measures.weight, 'body_fat_percentage': body_measures.body_fat_percentage, 'front_photo': None,
-        'back_photo': None, 'side_photo': None, 'user_profile': body_measures.user_profile.id, 'id': body_measures.id
+        'back_photo': None, 'side_photo': None, 'user_profile': body_measures.user_profile.id, 'id': body_measures.id,
+        'ffmi': str(round(body_measures.ffmi, 2)),
     }
 
 
