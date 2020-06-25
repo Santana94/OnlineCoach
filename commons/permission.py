@@ -10,7 +10,7 @@ class PermissionMiddleware(MiddlewareMixin):
     user_is_superuser = False
 
     def process_request(self, request):
-        token = request.META.get('Token')
+        token = request.META.get('Token') or request.headers.get('Token')
         PermissionMiddleware.user_token = token
 
         try:

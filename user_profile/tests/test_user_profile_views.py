@@ -19,7 +19,7 @@ def test_profile_detail(client):
     assert response.data == {
         'age': user_profile.age, 'gender': user_profile.gender, 'height': user_profile.height,
         'email': user_profile.email, 'first_name': user_profile.first_name, 'last_name': user_profile.last_name,
-        'username': user_profile.username
+        'username': user_profile.username, 'auth_token': str(user_profile.auth_token)
     }
 
 
@@ -46,7 +46,7 @@ def test_profile_list(client, count, is_superuser):
     assert response.data['count'] == count
     assert response.data['results'] == [
         {
-            'age': i.age, 'gender': i.gender, 'height': i.height,
+            'age': i.age, 'gender': i.gender, 'height': i.height, 'auth_token': str(i.auth_token),
             'email': i.email, 'first_name': i.first_name, 'last_name': i.last_name, 'username': i.username
         } for i in profiles
     ]
