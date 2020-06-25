@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from commons.permission import ModelPermissionManager
@@ -6,7 +6,7 @@ from user_profile.models import AbstractModel, UserProfile
 
 
 class BodyMeasures(AbstractModel):
-    weight = models.FloatField("Peso", validators=[MinValueValidator(20)])
+    weight = models.FloatField("Peso", validators=[MinValueValidator(20), MaxValueValidator(500)])
     body_fat_percentage = models.FloatField("Percentual de gordura", validators=[MinValueValidator(4)], blank=True,
                                             null=True)
     front_photo = models.ImageField("Foto frontal", upload_to='body_front_photos', blank=True, null=True)

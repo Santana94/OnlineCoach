@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -22,9 +23,9 @@ GENDER_CHOICES = (
 
 
 class UserProfile(User):
-    age = models.IntegerField("Idade")
+    age = models.IntegerField("Idade", validators=[MinValueValidator(3), MaxValueValidator(110)])
     gender = models.CharField("Gênero", choices=GENDER_CHOICES, max_length=10)
-    height = models.FloatField("Altura")
+    height = models.FloatField("Altura", validators=[MinValueValidator(0.3), MaxValueValidator(3)])
 
     objects = ModelPermissionManager(['auth_token'])
 
