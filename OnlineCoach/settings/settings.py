@@ -30,3 +30,5 @@ DATABASES = {
 #         'PASSWORD': os.environ['DATABASE_DEFAULT_PASSWORD'],
 #     }
 # }
+
+# TODO: Insert Sentry configuration
