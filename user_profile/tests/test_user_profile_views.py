@@ -72,6 +72,7 @@ def test_profile_token_error(client):
 
     # THEN
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
+    assert response.content == b'User \"Token\" is required!'
 
 
 def test_profile_invalid_token(client, user_profile):
@@ -82,3 +83,4 @@ def test_profile_invalid_token(client, user_profile):
 
     # THEN
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
+    assert response.content == b'User not found!'
