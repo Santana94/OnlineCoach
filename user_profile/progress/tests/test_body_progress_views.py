@@ -26,7 +26,7 @@ def test_body_measures_list(client):
         {
             'created_at': str(i.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
             'updated_at': str(i.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ")), 'ffmi': str(round(i.ffmi, 2)),
-            'weight': i.weight, 'body_fat_percentage': i.body_fat_percentage, 'front_photo': None,
+            'weight': round(i.weight, 1), 'body_fat_percentage': round(i.body_fat_percentage, 1), 'front_photo': None,
             'back_photo': None, 'side_photo': None, 'user_profile': i.user_profile.id, 'id': i.id
         } for i in body_measures
     ]

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
 
     # Application Apps
     'user_profile.progress',
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
     # Custom middlewares
     'commons.permission.PermissionMiddleware',
@@ -128,3 +130,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Debug Toolbar Config
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
