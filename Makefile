@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := default_target
 PROJECT_NAME := OnlineCoach
-PYTHON_VERSION := 3.6.3
+PYTHON_VERSION := 3.9.5
 VENV_NAME := $(PROJECT_NAME)-$(PYTHON_VERSION)
 
 code-convention:
@@ -23,7 +23,7 @@ code-convention:
 
 clean: .clean-build .clean-pyc .clean-test ## remove all build, test, coverage and Python artifacts
 
-.create-venv:
+create-venv:
 	pyenv uninstall -f $(VENV_NAME)
 	pyenv virtualenv $(PYTHON_VERSION) $(VENV_NAME)
 	pyenv local $(VENV_NAME)
