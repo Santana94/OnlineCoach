@@ -6,13 +6,13 @@ from user_profile.models import AbstractModel, UserProfile
 
 
 class BodyMeasures(AbstractModel):
-    weight = models.FloatField("Peso", validators=[MinValueValidator(20), MaxValueValidator(500)])
-    body_fat_percentage = models.FloatField("Percentual de gordura", validators=[MinValueValidator(4)], blank=True,
-                                            null=True)
-    front_photo = models.ImageField("Foto frontal", upload_to='body_front_photos', blank=True, null=True)
-    back_photo = models.ImageField("Foto traseira", upload_to='body_back_photos', blank=True, null=True)
-    side_photo = models.ImageField("Foto lateral", upload_to='body_side_photos', blank=True, null=True)
+    weight = models.FloatField("Weight", validators=[MinValueValidator(20), MaxValueValidator(500)])
+    body_fat_percentage = models.FloatField("Body Fat", validators=[MinValueValidator(4)], blank=True, null=True)
+    front_photo = models.ImageField("Front Photo", upload_to='body_front_photos', blank=True, null=True)
+    back_photo = models.ImageField("Back Photo", upload_to='body_back_photos', blank=True, null=True)
+    side_photo = models.ImageField("Side Photo", upload_to='body_side_photos', blank=True, null=True)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    measurement_date = models.DateField("Measurement Date")
 
     objects = ModelPermissionManager(['user_profile__auth_token'])
 

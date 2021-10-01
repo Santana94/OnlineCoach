@@ -1,0 +1,80 @@
+{% extends "home_page.html" %}
+{% load widget_tweaks %}
+
+{% block main %}
+    <h3 class="text-center border-bottom border-dark border-2 p-3 mb-3">Add Progress Information</h3>
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+              {{ form.errors }}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+              {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <div class="d-flex justify-content-between">
+            <div class="mb-3 p-3 w-100">
+              <label for="{{ form.weight.id_for_label }}" class="form-label">{{ form.weight.label }} (kg):</label>
+                <br>
+                {{ form.weight|add_class:"w-100"|attr:"placeholder=Weight" }}
+                {% if form.weight.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{ form.weight.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3 p-3 w-100">
+              <label for="{{ form.body_fat_percentage.id_for_label }}" class="form-label">{{ form.body_fat_percentage.label }} (%):</label>
+                <br>
+                {{ form.body_fat_percentage|add_class:"w-100"|attr:"placeholder=BodyFatPercentage" }}
+                {% if form.body_fat_percentage.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                      {{ form.body_fat_percentage.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3 p-3 w-100">
+              <label for="{{ form.measurement_date.id_for_label }}" class="form-label">{{ form.measurement_date.label }}:</label>
+                <br>
+                {{ form.measurement_date|add_class:"w-100" }}
+                {% if form.measurement_date.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                      {{ form.measurement_date.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div class="mb-3 p-3 w-100">
+              <label for="{{ form.front_photo.id_for_label }}" class="form-label">{{ form.front_photo.label }}:</label>
+                <br>
+                {{ form.front_photo|add_class:"w-100" }}
+                {% if form.front_photo.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                      {{ form.front_photo.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3 p-3 w-100">
+              <label for="{{ form.back_photo.id_for_label }}" class="form-label">{{ form.back_photo.label }}:</label>
+                <br>
+                {{ form.back_photo|add_class:"w-100" }}
+                {% if form.back_photo.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                      {{ form.back_photo.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-3 p-3 w-100">
+              <label for="{{ form.side_photo.id_for_label }}" class="form-label">{{ form.side_photo.label }}:</label>
+                <br>
+                {{ form.side_photo|add_class:"w-100" }}
+                {% if form.side_photo.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                      {{ form.side_photo.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+{% endblock %}

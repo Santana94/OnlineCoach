@@ -1,0 +1,108 @@
+{% extends "home_page.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block header_content %}
+    <link rel='stylesheet' href="{% static 'profile_detail.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h3 class="text-center border-bottom border-dark border-2 p-3 mb-3 fw-bold">User Profile</h3>
+    <div class="d-flex justify-content-around">
+        <div>
+            <h5>Name:</h5>
+            {{ user_profile.user|title }}
+        </div>
+        <div>
+            <h5>Age (years):</h5>
+            {{ user_profile.age|title }}
+        </div>
+        <div>
+            <h5>Height (m):</h5>
+            {{ user_profile.height|title }}
+        </div>
+    </div>
+    <h4 class="progress-data pb-2 mb-3 mt-5 border-bottom border-dark border-1 w-25">Progress Data:</h4>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pictures</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Progress Data</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="d-flex justify-content-evenly">
+        {% for data in progress_data %}
+            <div class="card mt-3" style="width: 20rem; border: none;">
+                  <img src="{{ data.front_photo.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ data.created_at }}</h5>
+                    <p class="card-text"><b>Weight (kg):</b> {{ data.weight }}</p>
+                    <p class="card-text"><b>Body Fat (%):</b> {{ data.body_fat_percentage }}</p>
+                    <p class="card-text"><b>FFMI:</b> {{ data.ffmi|floatformat }}</p>
+                  </div>
+
+                  <img src="{{ data.back_photo.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ data.created_at }}</h5>
+                    <p class="card-text"><b>Weight (kg):</b> {{ data.weight }}</p>
+                    <p class="card-text"><b>Body Fat (%):</b> {{ data.body_fat_percentage }}</p>
+                    <p class="card-text"><b>FFMI:</b> {{ data.ffmi|floatformat }}</p>
+                  </div>
+
+                  <img src="{{ data.side_photo.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ data.created_at }}</h5>
+                    <p class="card-text"><b>Weight (kg):</b> {{ data.weight }}</p>
+                    <p class="card-text"><b>Body Fat (%):</b> {{ data.body_fat_percentage }}</p>
+                    <p class="card-text"><b>FFMI:</b> {{ data.ffmi|floatformat }}</p>
+                  </div>
+            </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div>
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const labels = {{ labels|safe }};
+const data = {
+  labels: labels,
+  datasets: [
+  {
+    label: 'FFMI',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: {{ ffmi|safe }},
+  },
+  {
+    label: 'Body Fat (%)',
+    backgroundColor: 'rgb(178, 99, 132)',
+    borderColor: 'rgb(178, 99, 132)',
+    data: {{ body_fat|safe }},
+  },
+  {
+    label: 'Body Weight (kg)',
+    backgroundColor: 'rgb(99, 99, 132)',
+    borderColor: 'rgb(99, 99, 132)',
+    data: {{ weight|safe }},
+  },]
+};
+const config = {
+  type: 'line',
+  data: data,
+  options: {}
+};
+var myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+);
+</script>
+{% endblock %}
