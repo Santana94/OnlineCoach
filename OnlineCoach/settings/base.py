@@ -30,11 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'corsheaders',
+    'widget_tweaks',
 
     # Application Apps
     'user_profile.progress',
     # 'user_profile.training_progress',
     'user_profile',
+    'user_access',
 
     # Rest framework
     'rest_framework',

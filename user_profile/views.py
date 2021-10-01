@@ -1,3 +1,4 @@
+from django.views.generic import DetailView, CreateView, TemplateView
 from rest_framework.viewsets import ModelViewSet
 
 from user_profile.models import UserProfile
@@ -9,3 +10,14 @@ class UserProfileViewSet(ModelViewSet):
 
     def get_queryset(self):
         return UserProfile.objects.all().select_related('auth_token')
+
+
+class HomePage(TemplateView):
+    template_name = "home_page.html"
+
+
+class AccountProfile(DetailView, CreateView):
+    model = UserProfile
+
+    def get_queryset(self):
+        return self.model.objects.get(pk=self.kwargs.get("pk"))

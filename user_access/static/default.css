@@ -1,0 +1,17 @@
+.default-navbar {
+    box-shadow: 9px 6px 20px 5px #f3f3f3;
+}
+#navbar-brand{
+    color: black;
+}
+#navbar-brand:hover{
+    border: none;
+}
+.default-navbar a{
+    color: #000000a3;
+    padding: 10px;
+}
+.default-navbar a:hover {
+    color: black;
+    border-bottom: 1px solid;
+}
