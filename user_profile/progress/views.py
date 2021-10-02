@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import CreateView
 from rest_framework.viewsets import ModelViewSet
@@ -27,4 +28,4 @@ class CreateBodyMeasure(CreateView):
         self.object = form.save(commit=False)
         self.object.user_profile_id = self.request.user.user_profile.first().pk
         self.object.save()
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())

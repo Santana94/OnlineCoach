@@ -45,32 +45,32 @@
         </div>
         <div class="d-flex justify-content-between">
             <div class="mb-3 p-3 w-100">
-              <label for="{{ form.front_photo.id_for_label }}" class="form-label">{{ form.front_photo.label }}:</label>
+              <label for="{{ form.front_photo_file.id_for_label }}" class="form-label">{{ form.front_photo_file.label }}:</label>
                 <br>
-                {{ form.front_photo|add_class:"w-100" }}
-                {% if form.front_photo.errors %}
+                {{ form.front_photo_file|add_class:"w-100" }}
+                {% if form.front_photo_file.errors %}
                     <div class="alert alert-danger mt-2" role="alert">
-                      {{ form.front_photo.errors }}
+                      {{ form.front_photo_file.errors }}
                     </div>
                 {% endif %}
             </div>
             <div class="mb-3 p-3 w-100">
-              <label for="{{ form.back_photo.id_for_label }}" class="form-label">{{ form.back_photo.label }}:</label>
+              <label for="{{ form.back_photo_file.id_for_label }}" class="form-label">{{ form.back_photo_file.label }}:</label>
                 <br>
-                {{ form.back_photo|add_class:"w-100" }}
-                {% if form.back_photo.errors %}
+                {{ form.back_photo_file|add_class:"w-100" }}
+                {% if form.back_photo_file.errors %}
                     <div class="alert alert-danger mt-2" role="alert">
-                      {{ form.back_photo.errors }}
+                      {{ form.back_photo_file.errors }}
                     </div>
                 {% endif %}
             </div>
             <div class="mb-3 p-3 w-100">
-              <label for="{{ form.side_photo.id_for_label }}" class="form-label">{{ form.side_photo.label }}:</label>
+              <label for="{{ form.side_photo_file.id_for_label }}" class="form-label">{{ form.side_photo_file.label }}:</label>
                 <br>
-                {{ form.side_photo|add_class:"w-100" }}
-                {% if form.side_photo.errors %}
+                {{ form.side_photo_file|add_class:"w-100" }}
+                {% if form.side_photo_file.errors %}
                     <div class="alert alert-danger mt-2" role="alert">
-                      {{ form.side_photo.errors }}
+                      {{ form.side_photo_file.errors }}
                     </div>
                 {% endif %}
             </div>

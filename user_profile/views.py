@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, TemplateView, DetailView
@@ -60,4 +61,4 @@ class CreateUserProfile(CreateView):
         self.object = form.save(commit=False)
         self.object.user_id = self.request.user.pk
         self.object.save()
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
