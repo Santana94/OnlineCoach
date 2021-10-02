@@ -24,4 +24,6 @@ DATABASES = {
     }
 }
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 # TODO: Insert Sentry configuration
