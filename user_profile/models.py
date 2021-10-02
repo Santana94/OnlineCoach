@@ -34,4 +34,4 @@ class UserProfile(AbstractModel):
 @receiver(post_save, sender=UserProfile)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
-        Token.objects.create(user_id=instance.user.pk)
+        Token.objects.get_or_create(user_id=instance.user.pk)
