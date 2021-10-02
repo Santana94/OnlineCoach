@@ -26,7 +26,7 @@ class HomePage(TemplateView):
         has_user_profile = self.has_user_profile()
 
         if has_user_profile:
-            return redirect(f"/accounts/profile/detail/{self.request.user.pk}")
+            return redirect(f"/accounts/profile/detail/{self.request.user.user_profile.first().pk}")
 
         return self.render_to_response(context)
 
