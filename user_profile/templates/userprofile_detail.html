@@ -39,7 +39,6 @@
           {% if progress_data %}
             <div class="images-div">
             {% for data in progress_data %}
-                {{ data.front_photo }}
                 <div class="card mt-3" style="border: none;">
                       <img src="data:image;base64,{{ data.front_photo|bin_2_img }}" class="card-img-top" alt="...">
                       <div class="card-body">
