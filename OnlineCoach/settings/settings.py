@@ -24,6 +24,4 @@ DATABASES = {
     }
 }
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
 # TODO: Insert Sentry configuration
