@@ -20,3 +20,4 @@ sqlite3.db
 venv/
 media/
 media/*
+extra/*
