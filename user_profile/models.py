@@ -28,7 +28,7 @@ class UserProfile(AbstractModel):
     height = models.FloatField("Height", validators=[MinValueValidator(0.3), MaxValueValidator(3)])
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_profile")
 
-    objects = ModelPermissionManager(['auth_token'])
+    objects = ModelPermissionManager(['user__auth_token'])
 
 
 @receiver(post_save, sender=UserProfile)
