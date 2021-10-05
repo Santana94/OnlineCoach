@@ -14,7 +14,7 @@ class BodyMeasures(AbstractModel):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     measurement_date = models.DateField("Measurement Date")
 
-    objects = ModelPermissionManager(['user_profile__auth_token'])
+    objects = ModelPermissionManager(['user_profile__user__auth_token'])
 
     @property
     def ffmi(self):
