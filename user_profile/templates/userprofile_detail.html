@@ -42,7 +42,7 @@
                 <div class="card mt-3" style="border: none;">
                       <img src="data:image;base64,{{ data.front_photo|bin_2_img }}" class="card-img-top" alt="...">
                       <div class="card-body">
-                        <p class="card-title">{{ data.created_at }}</p>
+                        <p class="card-title">{{ data.measurement_date }}</p>
                         <p class="card-text"><b>Weight (kg):</b> {{ data.weight }}</p>
                         <p class="card-text"><b>Body Fat (%):</b> {{ data.body_fat_percentage }}</p>
                         <p class="card-text"><b>FFMI:</b> {{ data.ffmi|floatformat }}</p>
@@ -55,7 +55,7 @@
                 <div class="card mt-3" style="border: none;">
                       <img src="data:image;base64,{{ data.back_photo|bin_2_img }}" class="card-img-top" alt="...">
                       <div class="card-body">
-                        <p class="card-title">{{ data.created_at }}</p>
+                        <p class="card-title">{{ data.measurement_date }}</p>
                         <p class="card-text"><b>Weight (kg):</b> {{ data.weight }}</p>
                         <p class="card-text"><b>Body Fat (%):</b> {{ data.body_fat_percentage }}</p>
                         <p class="card-text"><b>FFMI:</b> {{ data.ffmi|floatformat }}</p>
@@ -68,7 +68,7 @@
                 <div class="card mt-3" style="border: none;">
                       <img src="data:image;base64,{{ data.side_photo|bin_2_img }}" class="card-img-top" alt="...">
                       <div class="card-body">
-                        <p class="card-title">{{ data.created_at }}</p>
+                        <p class="card-title">{{ data.measurement_date }}</p>
                         <p class="card-text"><b>Weight (kg):</b> {{ data.weight }}</p>
                         <p class="card-text"><b>Body Fat (%):</b> {{ data.body_fat_percentage }}</p>
                         <p class="card-text"><b>FFMI:</b> {{ data.ffmi|floatformat }}</p>
